@@ -5,16 +5,14 @@ const getnombre= async (idAlbum)=>{
         const resIdAlbum= await fetch(`${url}`)
 
         const postAlbum =await resIdAlbum.json()
-        var arr2=[]
-        // var arr3=[]
-        var arr= postAlbum.forEach(el => {
+        var arr=[]
+        postAlbum.forEach(el => {
            if( el.albumId==idAlbum){
-               arr2.push({album: el.albumId, id: el.id, tiutlo: el.title})
+               arr.push({album: el.albumId, id: el.id, tiutlo: el.title})
            }
         });
-        arr2.splice(20)
-        console.log(postAlbum[0])
-        console.log(arr2)
+        arr.splice(20)
+        console.log(arr)
 
     } catch(error){
         console.log(error)
@@ -22,3 +20,15 @@ const getnombre= async (idAlbum)=>{
 }
 
 getnombre(15)
+
+let mypromise=()=>{
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            resolve(console.log(`Información enviada`))
+        },3000)
+    })
+}
+async function otra(){
+ await mypromise()
+}
+otra()
