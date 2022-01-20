@@ -1,25 +1,24 @@
 const url= 'https://jsonplaceholder.typicode.com/photos/'
-const getnombre= async (idAlbum)=>{
+const getAlbum= async (idAlbum)=>{
     try{
 
         const resIdAlbum= await fetch(`${url}`)
-
         const postAlbum =await resIdAlbum.json()
         var arr=[]
         postAlbum.forEach(el => {
            if( el.albumId==idAlbum){
-               arr.push({album: el.albumId, id: el.id, tiutlo: el.title})
+               arr.push({album: el.albumId, id: el.id, titulo: el.title})
            }
         });
         arr.splice(20)
-        console.log(arr)
+        arr.forEach(el=>{
+            console.log(`Album: ${el.album}  Id: ${el.id}  Titulo: ${el.titulo}`)
+        })
 
     } catch(error){
-        console.log(error)
+        console.error(error)
     }
 }
-
-getnombre(15)
 
 let mypromise=()=>{
     return new Promise((resolve, reject)=>{
@@ -28,7 +27,8 @@ let mypromise=()=>{
         },3000)
     })
 }
-async function otra(){
+async function funcionAsincrona(){
  await mypromise()
 }
-otra()
+funcionAsincrona()
+getAlbum(15)
